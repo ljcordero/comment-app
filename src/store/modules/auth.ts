@@ -34,7 +34,7 @@ const actions: ActionTree<State, State> = {
     }
   },
   logOut({ commit }: ActionContext<State, State>): void {
-    commit('logout');
+    commit('logOut');
   },
 };
 
