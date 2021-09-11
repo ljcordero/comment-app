@@ -1,4 +1,5 @@
 import { User } from '@/models/user';
+import Vue from 'vue';
 import { ActionContext, ActionTree, GetterTree } from 'vuex';
 
 export class State {
@@ -40,10 +41,10 @@ const actions: ActionTree<State, State> = {
 
 const mutations = {
   logIn(state: State, user: User): void {
-    state.user = user;
+    Vue.set(state, 'user', user);
   },
   logOut(state: State): void {
-    state.user = undefined;
+    Vue.set(state, 'user', undefined);
   },
 };
 

@@ -1,15 +1,5 @@
 <template>
-  <nav
-    class="
-      navbar
-      shadow
-      bg-white
-      rounded
-      justify-content-between
-      flex-nowrap flex-row
-      fixed-top
-    "
-  >
+  <nav class="navbar shadow justify-content-between flex-nowrap flex-row">
     <div class="container">
       <a class="navbar-brand float-left"> Comments </a>
       <ul class="nav navbar-nav flex-row float-right">
@@ -38,7 +28,7 @@ export default class HelloWorld extends Vue {
 
   private signOut(): void {
     this.logOut();
-    router.push("/");
+    router.push({ name: "Login" });
   }
 }
 </script>

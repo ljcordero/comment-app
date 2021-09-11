@@ -3,7 +3,9 @@
     <!-- Navigation -->
     <Navbar />
     <!-- Main -->
-    <router-view />
+    <div class="content">
+      <router-view />
+    </div>
   </div>
 </template>
 
@@ -20,12 +22,21 @@ export default class App extends Vue {}
 </script>
 
 <style lang="scss">
+html,
+body {
+  height: 100%;
+}
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  padding-top: 60px;
+  height: 100%;
+}
+
+.content {
+  height: calc(100% - 56px);
 }
 </style>
