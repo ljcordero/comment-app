@@ -32,14 +32,13 @@
 import { User } from "@/models/user";
 import router from "@/router";
 import { Component, Vue } from "vue-property-decorator";
-import { Action, Getter, State } from "vuex-class";
+import { Action } from "vuex-class";
 
 @Component({
   components: {},
 })
 export default class Login extends Vue {
   @Action private logIn: (user: User) => void;
-  @Getter private user: User;
 
   private email: string = "";
   private password: string = "";

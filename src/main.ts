@@ -3,10 +3,16 @@ import App from './App.vue';
 import router from './router';
 import store from './store';
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue';
+// @ts-ignore: Unreachable code error
+import VueQuillEditor from 'vue-quill-editor';
 
 // Import Bootstrap an BootstrapVue CSS files (order is important)
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-vue/dist/bootstrap-vue.css';
+
+import 'quill/dist/quill.core.css'; // import styles
+import 'quill/dist/quill.snow.css'; // for snow theme
+import 'quill/dist/quill.bubble.css'; // for bubble theme
 
 Vue.config.productionTip = false;
 
@@ -14,6 +20,8 @@ Vue.config.productionTip = false;
 Vue.use(BootstrapVue);
 // Optionally install the BootstrapVue icon components plugin
 Vue.use(IconsPlugin);
+
+Vue.use(VueQuillEditor);
 
 new Vue({
   router,

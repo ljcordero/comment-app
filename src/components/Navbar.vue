@@ -22,7 +22,7 @@ import { Component, Vue } from "vue-property-decorator";
 import { Action, Getter } from "vuex-class";
 
 @Component
-export default class HelloWorld extends Vue {
+export default class Navbar extends Vue {
   @Getter private isAuthenticated: boolean;
   @Action private logOut: () => void;
 
