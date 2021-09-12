@@ -4,7 +4,7 @@
     v-bind:class="{ shadow: level === 1, 'border-bottom': level === 2 }"
   >
     <div class="d-flex justify-content-between">
-      <div class="d-flex flex-row">
+      <div class="d-flex flex-row w-100">
         <img
           class="user-photo"
           height="50"
@@ -12,7 +12,7 @@
           :src="comment.createdBy.photo"
           :alt="comment.createdBy.name"
         />
-        <div class="d-flex flex-column">
+        <div class="d-flex flex-column w-100">
           <span class="text-start user-name">{{ comment.createdBy.name }}</span>
           <comment-form
             v-if="editing"
@@ -40,12 +40,18 @@
           </div>
         </div>
       </div>
-      <div style="min-width: 255px">
+      <div style="min-width: 260px">
         <b-icon
           v-if="isEditable"
           @click="editing = true"
-          class="edit pointer"
+          class="mr-25 pointer"
           icon="pencil-square"
+        ></b-icon>
+        <b-icon
+          v-if="isEditable"
+          @click="remove"
+          class="mr-25 pointer"
+          icon="x"
         ></b-icon>
         <span>{{ createdAt }}</span>
       </div>
@@ -91,6 +97,7 @@ export default class CommentViewer extends Vue {
   }) => void;
   @Action("add") private addComment: (comment: Comment) => void;
   @Action("edit") private editComment: (comment: Comment) => void;
+  @Action("remove") private removeComment: (commentId: string) => void;
 
   @Getter private user: User;
   @Getter private comments: Comment[];
@@ -145,6 +152,10 @@ export default class CommentViewer extends Vue {
     });
     this.editing = false;
   }
+
+  private remove(commentId: string) {
+    this.removeComment(this.comment.id as string);
+  }
 }
 </script>
 
@@ -171,7 +182,7 @@ export default class CommentViewer extends Vue {
   cursor: pointer;
 }
 
-.edit {
+.mr-25 {
   margin-right: 25px;
 }
 

@@ -26,6 +26,9 @@ const actions: ActionTree<State, State> = {
   like({ commit }: ActionContext<State, State>, values: { commentId: string, user: User }): void {
     commit('like', values);
   },
+  remove({ commit }: ActionContext<State, State>, commentId: string): void {
+    commit('remove', commentId);
+  },
 };
 
 const mutations = {
@@ -42,6 +45,20 @@ const mutations = {
     if (comment) {
       comment.likedBy?.push(values.user);
     }
+  },
+  remove(state: State, commentId: string): void {
+    const removeChilds = (parentCommentId: string) => {
+      state.comments.forEach((comment, index) => {
+        if (comment.parentCommentId === parentCommentId) {
+          removeChilds(comment.id as string);
+          state.comments.splice(index, 1);
+        }
+      });
+    };
+
+    removeChilds(commentId);
+    const commentIndex = state.comments.findIndex((x) => x.id === commentId);
+    state.comments.splice(commentIndex, 1);
   },
 };
 
