@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import VueRouter, { RouteConfig } from 'vue-router';
 import Login from '../views/Login.vue';
+import Comments from '../views/Comments.vue';
 import Store from '@/store';
 
 Vue.use(VueRouter);
@@ -14,10 +15,7 @@ const routes: RouteConfig[] = [
   {
     path: '/comments',
     name: 'Comments',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/Comments.vue'),
+    component: Comments,
     meta: { requiresAuth: true },
   },
   {
