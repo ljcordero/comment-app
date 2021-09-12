@@ -1,7 +1,7 @@
 <template>
   <div
     class="rounded px-3 py-3"
-    v-bind:class="{ shadow: level === 1, 'border-bottom': level === 2 }"
+    :class="{ shadow: level === 1, 'border-bottom': level === 2 }"
   >
     <div class="d-flex justify-content-between">
       <div class="d-flex flex-row w-100">
@@ -23,7 +23,11 @@
           />
           <span v-else class="text-start" v-html="comment.content"></span>
           <div class="d-flex align-items-center text-start">
-            <span class="badge bg-light text-dark">{{ likes }}</span>
+            <span
+              :style="{ opacity: likes }"
+              class="badge bg-light text-dark"
+              >{{ likes }}</span
+            >
             <b-icon
               v-if="!currentUserLikedComment"
               @click="like"
@@ -106,7 +110,7 @@ export default class CommentViewer extends Vue {
   private replying: boolean = false;
 
   get likes(): number | undefined {
-    return this.comment.likedBy?.length || undefined;
+    return this.comment.likedBy?.length;
   }
 
   get currentUserLikedComment(): boolean | undefined {
@@ -153,7 +157,7 @@ export default class CommentViewer extends Vue {
     this.editing = false;
   }
 
-  private remove(commentId: string) {
+  private remove(): void {
     this.removeComment(this.comment.id as string);
   }
 }
