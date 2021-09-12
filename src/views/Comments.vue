@@ -3,7 +3,9 @@
     <div class="d-flex justify-content-between mb-4">
       <h2 class="mb-0">
         Comentarios
-        <span class="badge bg-light text-dark">{{ comments.length }}</span>
+        <span class="badge bg-light text-dark">{{
+          parentComments.length
+        }}</span>
       </h2>
       <div class="d-flex align-items-center">
         <label class="label">Ordenar por:</label>
@@ -18,6 +20,7 @@
       v-for="comment in commentsOrdered"
       :key="comment.id"
       :comment="comment"
+      :level="1"
     />
     <div class="mt-4">
       <button
@@ -28,10 +31,12 @@
       >
         Nuevo Comentario
       </button>
-      <div class="shadow rounded px-5 py-4 text-start">
+      <div
+        v-if="commentFormVisible"
+        class="shadow rounded px-5 py-4 text-start"
+      >
         <h3 class="mb-4">Tu Comentario</h3>
         <comment-form
-          v-if="commentFormVisible"
           @cancel="commentFormVisible = false"
           @save="saveNewComment"
         />
@@ -62,8 +67,14 @@ export default class Comments extends Vue {
   private commentFormVisible: boolean = true;
   private commentsOrder: string = "ASC";
 
+  get parentComments(): Comment[] {
+    return this.comments.filter(
+      (comment) => comment.parentCommentId === undefined,
+    );
+  }
+
   get commentsOrdered(): Comment[] {
-    return this.comments.sort((a, b) => {
+    return this.parentComments.sort((a, b) => {
       if (this.commentsOrder === "ASC") {
         return a.createdAt < b.createdAt ? -1 : 1;
       } else {
@@ -77,6 +88,7 @@ export default class Comments extends Vue {
       content,
       createdAt: new Date(),
       createdBy: this.user,
+      parentCommentId: undefined,
     });
   }
 }

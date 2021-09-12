@@ -22,13 +22,13 @@ const actions: ActionTree<State, State> = {
       },
       {
         name: 'john',
-        photo: 'https://via.placeholder.com/150/000000/FFFFFF/?text=JOHN',
+        photo: 'https://via.placeholder.com/150/0000FF/FFFFFF/?text=JOHN',
         email: 'john@doe.com',
         password: '1234',
       },
       {
         name: 'juan',
-        photo: 'https://via.placeholder.com/150/000000/FFFFFF/?text=JUAN',
+        photo: 'https://via.placeholder.com/150/FF0000/FFFFFF/?text=JUAN',
         email: 'juan@perez.com',
         password: '1234',
       },

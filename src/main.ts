@@ -21,7 +21,12 @@ Vue.use(BootstrapVue);
 // Optionally install the BootstrapVue icon components plugin
 Vue.use(IconsPlugin);
 
-Vue.use(VueQuillEditor);
+Vue.use(VueQuillEditor, {
+  modules: {
+    toolbar: ['bold', 'italic', 'underline', 'strike'],
+  },
+  placeholder: 'Tu comentario',
+});
 
 new Vue({
   router,

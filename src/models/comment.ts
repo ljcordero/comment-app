@@ -5,6 +5,6 @@ export interface Comment {
   content: string;
   createdAt: Date;
   createdBy: User;
-  subComments?: Comment[];
+  parentCommentId?: string;
   likedBy?: User[];
 }

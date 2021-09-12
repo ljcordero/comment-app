@@ -18,7 +18,6 @@ const actions: ActionTree<State, State> = {
       ...comment,
       id: uuidv4(),
       likedBy: [],
-      subComments: [],
     });
   },
   edit({ commit }: ActionContext<State, State>, comment: Comment): void {
