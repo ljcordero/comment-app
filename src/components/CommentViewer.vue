@@ -10,7 +10,14 @@
       />
       <div class="d-flex flex-column">
         <span class="text-start user-name">{{ comment.createdBy.name }}</span>
-        <span class="text-start" v-html="comment.content"></span>
+        <comment-form
+          v-if="editing"
+          class="text-start mt-2 mb-4"
+          :value="comment.content"
+          @cancel="editing = false"
+          @save="edit"
+        />
+        <span v-else class="text-start" v-html="comment.content"></span>
         <div class="d-flex align-items-center text-start">
           <span class="badge bg-light text-dark">{{ likes }}</span>
           <b-icon
@@ -28,8 +35,12 @@
         </div>
       </div>
     </div>
-    <div>
-      <b-icon @click="edit" class="edit pointer" icon="pencil-square"></b-icon>
+    <div style="min-width: 255px">
+      <b-icon
+        @click="editing = true"
+        class="edit pointer"
+        icon="pencil-square"
+      ></b-icon>
       <span>{{ createdAt }}</span>
     </div>
   </div>
@@ -40,15 +51,23 @@ import { Component, Prop, Vue } from "vue-property-decorator";
 import { Comment } from "@/models/comment";
 import { Action, Getter } from "vuex-class";
 import { User } from "@/models/user";
+import CommentForm from "./CommentForm.vue";
 
-@Component
+@Component({
+  components: {
+    CommentForm,
+  },
+})
 export default class CommentViewer extends Vue {
   @Prop({ required: true }) private comment: Comment;
   @Action("like") private likeComment: (values: {
     commentId: string;
     user: User;
   }) => void;
+  @Action("edit") private editComment: (comment: Comment) => void;
   @Getter private user: User;
+
+  private editing: boolean = false;
 
   get likes(): number | undefined {
     return this.comment.likedBy?.length || undefined;
@@ -67,6 +86,14 @@ export default class CommentViewer extends Vue {
       commentId: this.comment.id as string,
       user: this.user,
     });
+  }
+
+  private edit(content: string): void {
+    this.editComment({
+      ...this.comment,
+      content,
+    });
+    this.editing = false;
   }
 }
 </script>

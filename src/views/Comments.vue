@@ -28,11 +28,14 @@
       >
         Nuevo Comentario
       </button>
-      <comment-form
-        v-if="commentFormVisible"
-        @cancel="commentFormVisible = false"
-        @save="saveNewComment"
-      />
+      <div class="shadow rounded px-5 py-4 text-start">
+        <h3 class="mb-4">Tu Comentario</h3>
+        <comment-form
+          v-if="commentFormVisible"
+          @cancel="commentFormVisible = false"
+          @save="saveNewComment"
+        />
+      </div>
     </div>
   </div>
 </template>

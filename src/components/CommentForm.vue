@@ -1,6 +1,5 @@
 <template>
-  <div class="shadow rounded px-5 py-4 text-start">
-    <h3 class="mb-4">Tu Comentario</h3>
+  <div>
     <quill-editor v-model="content" />
     <div class="mt-4">
       <button
