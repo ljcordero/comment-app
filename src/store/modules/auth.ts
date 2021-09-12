@@ -15,21 +15,29 @@ const actions: ActionTree<State, State> = {
   logIn({ commit }: ActionContext<State, State>, user: User): void {
     const users: User[] = [
       {
+        name: 'test',
+        photo: 'https://via.placeholder.com/150/000000/FFFFFF/?text=TEST',
         email: 'test@test.com',
         password: '1234',
       },
       {
+        name: 'john',
+        photo: 'https://via.placeholder.com/150/000000/FFFFFF/?text=JOHN',
         email: 'john@doe.com',
         password: '1234',
       },
       {
+        name: 'juan',
+        photo: 'https://via.placeholder.com/150/000000/FFFFFF/?text=JUAN',
         email: 'juan@perez.com',
         password: '1234',
       },
     ];
 
-    if (users.some((x) => x.email === user.email && x.password === user.password)) {
-      commit('logIn', user);
+    const existingUser = users.find((x) => x.email === user.email && x.password === user.password);
+
+    if (!!existingUser) {
+      commit('logIn', existingUser);
     } else {
       throw new Error('Invalid credentials');
     }

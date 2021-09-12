@@ -14,8 +14,12 @@ const getters: GetterTree<State, State> = {
 
 const actions: ActionTree<State, State> = {
   add({ commit }: ActionContext<State, State>, comment: Comment): void {
-    comment.id = uuidv4();
-    commit('add', comment);
+    commit('add', {
+      ...comment,
+      id: uuidv4(),
+      likedBy: [],
+      subComments: [],
+    });
   },
   edit({ commit }: ActionContext<State, State>, comment: Comment): void {
     commit('edit', comment);

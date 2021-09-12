@@ -19,11 +19,17 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+import { Component, Prop, Vue } from "vue-property-decorator";
 
 @Component
 export default class CommentForm extends Vue {
+  @Prop() private value: string;
+
   private content: string = "";
+
+  private mounted(): void {
+    this.content = this.value || "";
+  }
 
   private cancel(): void {
     this.$emit("cancel");
